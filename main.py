@@ -6,6 +6,7 @@ import wikipedia
 import pyjokes
 import smtplib
 import requests, json
+from twilio.rest import Client
 listener = sr.Recognizer()
 vroom = pyttsx3.init()
 voices = vroom.getProperty('voices')
@@ -22,6 +23,7 @@ def take_command():
     try:
         with sr.Microphone() as source:
             talk('listening...')
+            print('listening...')
             voice = listener.listen(source)
             command = listener.recognize_google(voice)
             command = command.lower()
@@ -99,8 +101,8 @@ def run_diana():
             print('The answer is:', method)
     elif 'weather' in command:
         base__url = "https://api.openweathermap.org/data/2.5/weather?"
-        city = str(input('City you want to know the weather about(or nearest city also):
-        api_key = '' #put in your api key
+        city = str(input('City you want to know the weather about(or nearest city also):'))
+        api_key = ''#your api key
         URL = base__url + "q=" + city + "&appid=" + api_key
         response = requests.get(URL)
         if response.status_code == 200:
@@ -132,10 +134,15 @@ def run_diana():
     elif 'tell me about yourself' in command:
         talk("I am Diana, master Aneeketh's smart voice assistant. I'm named after princess diana from the amazons, inspired by the amazons of greek mythology. And, i love my name!")
 
+    elif 'call' in command:
+        rec = str(input('Person you want to call(with country code):'))
+        account_sid = '' #put in your acc sid
+        auth_token = ''#put in your acc authtoken
+        client = Client(account_sid, auth_token)
+        call = client.calls.create(twiml='<Response><Say>Hello this is call is made by diana</Say></Response>', to=rec, from_='')#put your twilio phone number in from_
 
+        print(call.sid)
     else:
-        talk('please repeat the command again')
-
-
+        talk('please say the command again.')
 while True:
     run_diana()
