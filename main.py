@@ -99,8 +99,8 @@ def run_diana():
             print('The answer is:', method)
     elif 'weather' in command:
         base__url = "https://api.openweathermap.org/data/2.5/weather?"
-        city = str(input('City you want to know the weather about(or nearest city also):'))
-        api_key = 'e4d1e3ddf4b5c49fd0060e30966e1904'
+        city = str(input('City you want to know the weather about(or nearest city also):
+        api_key = '' #put in your api key
         URL = base__url + "q=" + city + "&appid=" + api_key
         response = requests.get(URL)
         if response.status_code == 200:
