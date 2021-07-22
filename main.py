@@ -143,7 +143,8 @@ def run_diana():
         call = client.calls.create(twiml='<Response><Say>Hello this is call is made by diana</Say></Response>', to=rec, from_='')#put your twilio phone number in from_
 
         print(call.sid)
-       elif 'safety' in command:
+
+    elif 'safety' in command:
         cam = cv2.VideoCapture(0)
         while cam.isOpened():
             ret, frame1 = cam.read()
@@ -163,7 +164,7 @@ def run_diana():
                 winsound.Beep(900, 1000)
             if cv2.waitKey(10) == ord('q'):
                 break
-            cv2.imshow('Granny Cam V1', frame1)
+            cv2.imshow('Granny Cam V1', frame1))
     else:
         talk('please say the command again.')
 while True:
