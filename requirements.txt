@@ -6,3 +6,4 @@ pywhatkit
 wikipedia
 twilio
 requests
+opencv-python
