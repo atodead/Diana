@@ -103,13 +103,13 @@ def run_diana():
     elif 'weather' in command:
         base__url = "https://api.openweathermap.org/data/2.5/weather?"
         city = str(input('City you want to know the weather about(or nearest city also):'))
-        api_key = ''#your api key
+        api_key = 'e4d1e3ddf4b5c49fd0060e30966e1904'#your api key
         URL = base__url + "q=" + city + "&appid=" + api_key
         response = requests.get(URL)
         if response.status_code == 200:
             data = response.json()
             main = data['main']
-            temperature = main['temp']
+            temperature = main['temp'] -273.15
             humidity = main['humidity']
             pressure = main['pressure']
             report = data['weather']
@@ -137,10 +137,10 @@ def run_diana():
 
     elif 'call' in command:
         rec = str(input('Person you want to call(with country code):'))
-        account_sid = '' #put in your acc sid
-        auth_token = ''#put in your acc authtoken
+        account_sid = 'AC22cf2b76a3f487908130e524325f62ee' #put in your acc sid
+        auth_token = '1242e26c2d1ccf1b012ed56947083819'#put in your acc authtoken
         client = Client(account_sid, auth_token)
-        call = client.calls.create(twiml='<Response><Say>Hello this is call is made by diana</Say></Response>', to=rec, from_='')#put your twilio phone number in from_
+        call = client.calls.create(twiml='<Response><Say>Hello this is call is made by diana</Say></Response>', to=rec, from_='+18782847141')#put your twilio phone number in from_
 
         print(call.sid)
 
